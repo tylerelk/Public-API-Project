@@ -1,0 +1,32 @@
+<%- include('partials/header.ejs') %>
+
+<div class="message-container">
+    <h2><%= locals.message[0] %></h2>
+    <p><%= locals.message[1] %></p>
+    <p><%= locals.message[2] %></p>
+</div>
+<% if (locals.data) {%>
+    <img src="<%= locals.chart %>" alt="">
+    <div class="latlon-container">
+        <h3>Reference Latitude: <%= locals.location.latitude %></h3>
+        <h3>Reference Longitude: <%= locals.location.longitude %></h3>
+    </div>
+    <table>
+        <tr>
+            <th style="border-bottom: 3px solid var(--blue);">Date</th>
+            <th style="border-bottom: 3px solid var(--blue);">Highest Temperature</th>
+        </tr>
+        <% locals.data.forEach(date => {%>
+            <tr>
+                <th><%= date.date %></th>
+                <% if (date.tmax) {%>
+                <th><%= date.tmax %></th>
+                <% } else { %>
+                <th style="color: red">No data recorded</th>
+                <% } %>
+            </tr>
+        <% }) %>
+    </table>
+<% } %>
+
+<%- include('partials/footer.ejs') %>
